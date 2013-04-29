@@ -34,7 +34,7 @@ $(function() {
 
       // grab label value
       var labelvalue = label.replace("Model_","").split("_")[0];
-      m.color = _ATLAS_.volumes[0].labelmap.colortable.get(labelvalue).splice(1,3);
+      m.color = _ATLAS_.volumes[0].labelmap.colortable.get(labelvalue).slice(0).splice(1,3);
 
 
       _ATLAS_.meshes[_ATLAS_.currentVolume][label] = m;
