@@ -202,18 +202,23 @@ function bgColorVolume(hex, rgb) {
 //
 function opacityLabelmap(event, ui) {
   var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+  console.log(volume.labelmap.opacity);
   if (!volume) {
     return;
   }
 
+
+
   volume.labelmap.opacity = ui.value / 100;
 
-  if (RT.linked) {
 
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushLabelmap.bind(RT, 'opacity', volume.labelmap.opacity), 150);
 
-  }
+//  if (RT.linked) {
+//
+//    clearTimeout(RT._updater);
+//    RT._updater = setTimeout(RT.pushLabelmap.bind(RT, 'opacity', volume.labelmap.opacity), 150);
+//
+//  }
 
 }
 

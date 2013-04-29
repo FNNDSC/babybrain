@@ -1,59 +1,61 @@
-mesh_tree_data = [
-	{
-		label : '<button id="Region1" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">Region 1</span>',
-		children : [
-			 { label: '<button id="mesh1" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh1</span>' },
-			 { label: '<button id="mesh2" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh2</span>' },
-			 { label: '<button id="mesh3" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh3</span>' },
-			 { label: '<button id="mesh4" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh4</span>' },
-		]
-	},
-	{
-		label : '<button id="Region2" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">Region 2</span>',
-		children : [
-			 { label: '<button id="mesh1" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh1</span>' },
-			 { label: '<button id="mesh2" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh2</span>' },
-			 { label: '<button id="mesh3" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh3</span>' },
-			 { label: '<button id="mesh4" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh4</span>' },
-		]
-	},
-	{
-		label : '<button id="Region3" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">Region 3</span>',
-		children : [
-			 { label: '<button id="mesh1" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh1</span>' },
-			 { label: '<button id="mesh2" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh2</span>' },
-			 { label: '<button id="mesh3" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh3</span>' },
-			 { label: '<button id="mesh4" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh4</span>' },
-		]
-	},
-	{
-		label : '<button id="Region4" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">Region 4</span>',
-		children : [
-			 { label: '<button id="mesh1" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh1</span>' },
-			 { label: '<button id="mesh2" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh2</span>' },
-			 { label: '<button id="mesh3" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh3</span>' },
-			 { label: '<button id="mesh4" class="tree_button" onClick=""><img src="gfx/show.png"></button><span class="tree_label">mesh4</span>' },
-		]
-	}
-];
-
 
 $(function() {
 
-	// create label tree
-	$('#mesh_tree').tree({
-		data: mesh_tree_data,
-		autoEscape: false,
-		autoOpen: true
-	});
-	
-	//create controls
-	$("#mesh_control_opacity").slider({
-		value: 0,
-		min: 0,
-		step: 1,
-		max: 100,
-	});
+  var origs = [];
+  var entries = [];
+
+  for (l in _ATLAS_.meshes[0]) {
+
+    var nl = l.replace("Model_","").replace(".vtk","");
+    nl = nl.split("_")[1].replace("-"," ");
+    entries.push(nl);
+    origs.push(l);
+
+  }
+
+  //entries = entries.sort();
+
+  for (var j=0;j<entries.length;j++) {
+    $('#mesh_tree').append('<div class="mesh" data-value="'+origs[j]+'">'+entries[j]+'</div>');
+  }
+
+
+
+  $('.mesh').click(function(e) {
+
+    var label = $(e.target).attr('data-value');
+
+    if (!_ATLAS_.meshes[_ATLAS_.currentVolume][label]) {
+
+      // load mesh
+      var m = new X.mesh();
+      m.file = "data/"+_ATLAS_.steps[_ATLAS_.currentVolume]+"/"+label;
+      r0.add(m);
+
+      // grab label value
+      var labelvalue = label.replace("Model_","").split("_")[0];
+      m.color = _ATLAS_.volumes[0].labelmap.colortable.get(labelvalue).splice(1,3);
+
+
+      _ATLAS_.meshes[_ATLAS_.currentVolume][label] = m;
+      _ATLAS_.meshes[_ATLAS_.currentVolume][label].visible = false;
+
+    }
+
+    // show the mesh
+    console.log('showing '+l);
+    _ATLAS_.meshes[_ATLAS_.currentVolume][label].visible = !_ATLAS_.meshes[_ATLAS_.currentVolume][label].visible;
+
+  });
+
+
+  // create controls
+  $("#mesh_control_opacity").slider({
+    value: 0,
+    min: 0,
+    step: 1,
+    max: 100,
+    slide: opacityMesh
+  });
 
 });
-

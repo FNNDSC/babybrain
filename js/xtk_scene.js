@@ -1,7 +1,47 @@
 var _ATLAS_ = {};
 _ATLAS_.steps = [0.14, 41, 80];
 _ATLAS_.volumes = new Array(_ATLAS_.steps.length);
+_ATLAS_.meshes = [0.14, 41, 80];
 _ATLAS_.currentVolume = 0;
+_ATLAS_.currentMesh = 0;
+
+_ATLAS_.labels = {
+  "Cerebral Cortex": 3,
+  "Lateral Ventricle": 4,
+  "Cerebellum Cortex": 8,
+  "Thalamus": 9,
+  "Caudate": 11,
+  "Putamen": 12,
+  "Pallidum": 13,
+  "3rd Ventricle": 14,
+  "4th Ventricle": 15,
+  "Hippocampus": 17,
+  "Amygdala": 18,
+  "Accumbens area": 26,
+  "Ventral DC": 28,
+  "Vermis": 172,
+  "Midbrain": 173,
+  "Pons": 174,
+  "Medulla": 175
+};
+
+
+// setup mesh cache
+for (m in _ATLAS_.meshes) {
+
+  var _meshes = ["Model_11_Left-Caudate.vtk","Model_174_Pons.vtk","       Model_42_Right-Cerebral-Cortex.vtk ","  Model_52_Right-Pallidum.vtk","Model_12_Left-Putamen.vtk","Model_175_Medulla.vtk","    Model_43_Right-Lateral-Ventricle.vtk ","Model_53_Right-Hippocampus.vtk","Model_13_Left-Pallidum.vtk     ","      Model_17_Left-Hippocampus.vtk      ","  Model_47_Right-Cerebellum-Cortex.vtk"," Model_54_Right-Amygdala.vtk","Model_14_3rd-Ventricle.vtk       ","    Model_18_Left-Amygdala.vtk   ","        Model_48_Right-Thalamus.vtk        ","  Model_58_Right-Accumbens-area.vtk","Model_15_4th-Ventricle.vtk      ","     Model_26_Left-Accumbens-area.vtk    ","Model_4_Left-Lateral-Ventricle.vtk ","  Model_60_Right-VentralDC.vtk","Model_172_Vermis.vtk","     Model_28_Left-VentralDC.vtk      ","    Model_50_Right-Caudate.vtk     ","      Model_8_Left-Cerebellum-Cortex.vtk","Model_173_Midbrain.vtk","   Model_3_Left-Cerebral-Cortex.vtk   ","  Model_51_Right-Putamen.vtk         ","  Model_9_Left-Thalamus.vtk"]
+
+  _ATLAS_.meshes[m] = new Array(_meshes.length);
+  for (var i=0; i<_meshes.length;i++) {
+
+    var _currentMesh = jQuery.trim(_meshes[i]);
+    _ATLAS_.meshes[m][_currentMesh]  = null;
+
+  }
+
+}
+
+
 
 sliceX = null;
 sliceY = null;
@@ -12,8 +52,9 @@ $(function() {
 	// MRI volume
 	var volume = new X.volume();
 	volume.file = 'data/0.14/volume.nii.gz';
-	//volume.labelmap.file = 'data/0.14/labelmap.nii.gz';
-	//volume.labelmap.colortable.file = 'data/colortable.txt';
+	volume.labelmap.file = 'data/0.14/labelmap.nii.gz';
+	volume.labelmap.colortable.file = 'data/colortable.txt';
+	volume.labelmap.opacity = 0;
 
 	_ATLAS_.volumes[_ATLAS_.currentVolume] = volume;
 
