@@ -230,13 +230,13 @@ function toggleLabelmapVisibility() {
 
   volume.labelmap.visible = !volume.labelmap.visible;
 
-  if (RT.linked) {
+/*  if (RT.linked) {
 
     clearTimeout(RT._updater);
     RT._updater = setTimeout(RT.pushLabelmap.bind(RT, 'visible', volume.labelmap.visible), 150);
 
   }
-
+*/
 }
 
 //
@@ -250,13 +250,13 @@ function toggleMeshVisibility() {
 
   mesh.visible = !mesh.visible;
 
-  if (RT.linked) {
+/*  if (RT.linked) {
 
     clearTimeout(RT._updater);
     RT._updater = setTimeout(RT.pushMesh.bind(RT, 'visible', mesh.visible), 150);
 
   }
-
+*/
 }
 
 function meshColor(hex, rgb) {
@@ -277,18 +277,20 @@ function meshColor(hex, rgb) {
 
 function opacityMesh(event, ui) {
 
-  if (!mesh) {
-    return;
-  }
+	for (var m in _ATLAS_.meshes[_ATLAS_.currentVolume]) {
+		if (_ATLAS_.meshes[_ATLAS_.currentVolume][m] != null) {
+			_ATLAS_.meshes[_ATLAS_.currentVolume][m].opacity = ui.value / 100;		
+		}
+	}
 
-  mesh.opacity = ui.value / 100;
-
-  if (RT.linked) {
+	//_ATLAS_.meshes[_ATLAS_.currentVolume]['Model_3_Left-Cerebral-Cortex.vtk'].opacity = ui.value / 100;
+/*  if (RT.linked) {
 
     clearTimeout(RT._updater);
     RT._updater = setTimeout(RT.pushMesh.bind(RT, 'opacity', mesh.opacity), 150);
 
   }
+ */
 }
 
 function thresholdScalars(event, ui) {

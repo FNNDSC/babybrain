@@ -34,6 +34,15 @@ $(function() {
 	$("#3d_render_toggle").click(function() {
 	  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 		volume.volumeRendering = !volume.volumeRendering;
+		if ($("#3d_render_toggle").is(":checked")){
+			$('#axial_slice_toggle').button('disable');
+			$('#coronal_slice_toggle').button('disable');
+			$('#sagittal_slice_toggle').button('disable');
+		} else {
+			$('#axial_slice_toggle').button('enable');
+			$('#coronal_slice_toggle').button('enable');
+			$('#sagittal_slice_toggle').button('enable');
+		}
 	});
 
   	// image controls

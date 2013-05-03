@@ -13,7 +13,6 @@ $(function() {
 
   }
 
-  //entries = entries.sort();
 
   for (var j=0;j<entries.length;j++) {
     $('#mesh_tree').append('<ul>');
@@ -53,7 +52,7 @@ $(function() {
 
   // create controls
   $("#mesh_control_opacity").slider({
-    value: 0,
+    value: 100,
     min: 0,
     step: 1,
     max: 100,
