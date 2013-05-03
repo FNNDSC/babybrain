@@ -2,10 +2,10 @@ a:focus {
 outline: none;
 }
 
+.panel_quiz,
 .panel_volume, 
 .panel_labels, 
-.panel_mesh,
-.panel_quiz {
+.panel_mesh {
 position: absolute;
 top: 50px;
 left: 0;
@@ -25,6 +25,10 @@ opacity: .85;
 
 .panel_quiz {
 width: 300px;
+}
+
+.panel_mesh {
+width: 200px;
 }
 
 .panel p{
@@ -116,6 +120,16 @@ top: 300px;
 #trigger_mesh{
 top: 400px;
 }
+
+
+.label, .mesh{
+margin-bottom: 5px;
+font-size: 15px;
+cursor: hand; 
+cursor: pointer;
+}
+
+
 
 .columns{
 clear: both;

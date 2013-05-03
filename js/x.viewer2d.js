@@ -22,41 +22,38 @@ $(function() {
 // initialize 2D viewers
 function init_viewer2d() {
 
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 
 	// X Slice
-  if (sliceX) {
-    sliceX.destroy();
-  }
+	if (sliceX) {
+		sliceX.destroy();
+	}
 	sliceX = new X.renderer2D();
 	sliceX.container = 'sliceX';
 	sliceX.orientation = 'X';
 	sliceX.init();
-
 	sliceX.add(volume);
 	sliceX.render();
 
 	// Y Slice
 	if (sliceY) {
-	  sliceY.destroy();
+		sliceY.destroy();
 	}
 	sliceY = new X.renderer2D();
 	sliceY.container = 'sliceY';
 	sliceY.orientation = 'Y';
 	sliceY.init();
-
 	sliceY.add(volume);
 	sliceY.render();
 
-	// Y Slice
+	// Z Slice
 	if (sliceZ) {
-	  sliceZ.destroy();
+		sliceZ.destroy();
 	}
 	sliceZ = new X.renderer2D();
 	sliceZ.container = 'sliceZ';
 	sliceZ.orientation = 'Z';
 	sliceZ.init();
-
 	sliceZ.add(volume);
 	sliceZ.render();
 

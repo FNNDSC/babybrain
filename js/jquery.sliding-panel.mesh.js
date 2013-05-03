@@ -16,7 +16,9 @@ $(function() {
   //entries = entries.sort();
 
   for (var j=0;j<entries.length;j++) {
-    $('#mesh_tree').append('<div class="mesh" data-value="'+origs[j]+'">'+entries[j]+'</div>');
+    $('#mesh_tree').append('<ul>');
+    $('#mesh_tree').append('<li class="mesh" data-value="'+origs[j]+'">'+entries[j]+'</li>');
+    $('#mesh_tree').append('</ul>');
   }
 
 

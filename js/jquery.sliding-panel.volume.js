@@ -37,19 +37,24 @@ $(function() {
 	});
 
   	// image controls
-	$("#image_control_threshold").slider({
+	$("#image_control_threshold").dragslider({
 		range: true,
 		rangeDrag: true,
-		values: [0, 100],
+		min: 0,
+		max: 255,
+		values: [0, 255],
 		slide: thresholdVolume // connect to x.controller.js
 	});
-	$("#image_control_brightness").slider({
+	$("#image_control_brightness").dragslider({
 		range: true,
 		rangeDrag: true,
-		values: [0, 100],
+		min: 0,
+		max: 255,
+		values: [40, 140],
 		slide: windowLevelVolume // connect to x.controller.js
 	});
 	$("#image_control_opacity").slider({
+		value: 100,
 		slide: opacity3dVolume
 	});
 
