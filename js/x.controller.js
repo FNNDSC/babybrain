@@ -34,133 +34,90 @@ function setupUi() {
 
 }
 
-function volumerenderingOnOff(bool) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.volumeRendering = bool;
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'volumeRendering', volume.volumeRendering), 150);
-  }
-*/
-
+function toggleVolumeRendering() {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	volume.volumeRendering = !volume.volumeRendering;
 }
 
 function thresholdVolume(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.lowerThreshold = ui.values[0];
-  volume.upperThreshold = ui.values[1];
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'lowerThreshold', volume.lowerThreshold), 150);
-    clearTimeout(RT._updater2);
-    RT._updater2 = setTimeout(RT.pushVolume.bind(RT, 'upperThreshold', volume.upperThreshold), 150);
-
-  }
-*/
-
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	if (event == null){
+		if (ui[0] != null){
+			volume.lowerThreshold = ui[0];
+			volume.upperThreshold = ui[1];		
+		}
+		if (ui[1] != null){
+			volume.lowerThreshold = ui[0];
+			volume.upperThreshold = ui[1];		
+		}
+	} else {
+		volume.lowerThreshold = ui.values[0];
+		volume.upperThreshold = ui.values[1];
+	}
 }
 
 function windowLevelVolume(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.windowLow = ui.values[0];
-  volume.windowHigh = ui.values[1];
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'windowLow', volume.windowLow), 150);
-    clearTimeout(RT._updater2);
-    RT._updater2 = setTimeout(RT.pushVolume.bind(RT, 'windowHigh', volume.windowHigh), 150);
-
-  }
-*/
-
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	
+	volume.windowLow = ui.values[0];
+	volume.windowHigh = ui.values[1];
 }
 
 function opacity3dVolume(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	if (event == null){
+		volume.opacity = ui;	
+	} else {
+		volume.opacity = ui.value / 100;
+	}
+}
 
-  volume.opacity = ui.value / 100;
+function toggleAxialSliceVisibility() {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	volume.children[2].children[Math.floor(volume.indexZ)].visible = !volume.children[2].children[Math.floor(volume.indexZ)].visible;
+}
 
-/*  if (RT.linked) {
+function toggleCoronalSliceVisibility() {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	volume.children[1].children[Math.floor(volume.indexY)].visible = !volume.children[1].children[Math.floor(volume.indexY)].visible;
+}
 
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'opacity', volume.opacity), 150);
-
-  }
-*/
-
+function toggleSagittalSliceVisibility() {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	volume.children[0].children[Math.floor(volume.indexX)].visible = !volume.children[0].children[Math.floor(volume.indexX)].visible;
 }
 
 function volumeslicingX(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.indexX = Math
-      .floor(jQuery('#yellow_slider').slider("option", "value"));
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'indexX', volume.indexX), 150);
-
-  }
-*/
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	volume.indexX = Math.floor($('#yellow_slider').slider("option", "value"));
 }
 
 function volumeslicingY(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.indexY = Math.floor(jQuery('#red_slider').slider("option", "value"));
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'indexY', volume.indexY), 150);
-
-  }
-*/
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	volume.indexY = Math.floor($('#red_slider').slider("option", "value"));
 }
 
 function volumeslicingZ(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.indexZ = Math.floor(jQuery('#green_slider').slider("option", "value"));
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushVolume.bind(RT, 'indexZ', volume.indexZ), 150);
-
-  }
-*/
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+		return;
+	}
+	volume.indexZ = Math.floor($('#green_slider').slider("option", "value"));
 }
 
 function fgColorVolume(hex, rgb) {
@@ -201,62 +158,54 @@ function bgColorVolume(hex, rgb) {
 // LABELMAP
 //
 function opacityLabelmap(event, ui) {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  console.log(volume.labelmap.opacity);
-  if (!volume) {
-    return;
-  }
-
-
-
-  volume.labelmap.opacity = ui.value / 100;
-
-
-
-//  if (RT.linked) {
-//
-//    clearTimeout(RT._updater);
-//    RT._updater = setTimeout(RT.pushLabelmap.bind(RT, 'opacity', volume.labelmap.opacity), 150);
-//
-//  }
-
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+	return;
+	}
+	if (event == null){
+		volume.labelmap.opacity = ui;
+	} else {
+		volume.labelmap.opacity = ui.value / 100;
+	}
 }
 
-function toggleLabelmapVisibility() {
-  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-  if (!volume) {
-    return;
-  }
-
-  volume.labelmap.visible = !volume.labelmap.visible;
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushLabelmap.bind(RT, 'visible', volume.labelmap.visible), 150);
-
-  }
-*/
+function toggleLabelmapVisibility(label) {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (!volume) {
+	return;
+	}
+	if (label == "all") {
+		label = null;
+		volume.labelmap.opacity = 0.5;
+	} else if (label == "none") {
+		label = null;
+		volume.labelmap.opacity = 0;
+	} else {
+		volume.labelmap.opacity = 0.5;
+	}
+	volume.labelmap.showOnly = label;
+	_ATLAS_.labelOpacity = volume.labelmap.opacity;
 }
 
 //
 // MESH
 //
-function toggleMeshVisibility() {
+function toggleMeshVisibility(label) {
 
-  if (!mesh) {
-    return;
-  }
-
-  mesh.visible = !mesh.visible;
-
-/*  if (RT.linked) {
-
-    clearTimeout(RT._updater);
-    RT._updater = setTimeout(RT.pushMesh.bind(RT, 'visible', mesh.visible), 150);
-
-  }
-*/
+	if (!_ATLAS_.meshes[_ATLAS_.currentVolume][label]) {
+		// load mesh
+		var m = new X.mesh();
+		m.file = "data/"+_ATLAS_.steps[_ATLAS_.currentVolume]+"/"+label;
+		r0.add(m);
+		// grab label value
+		var labelvalue = label.replace("Model_","").split("_")[0];
+		m.color = _ATLAS_.volumes[0].labelmap.colortable.get(labelvalue).slice(0).splice(1,3);
+		_ATLAS_.meshes[_ATLAS_.currentVolume][label] = m;
+		_ATLAS_.meshes[_ATLAS_.currentVolume][label].visible = false;
+		_ATLAS_.meshes[_ATLAS_.currentVolume][label].opacity = _ATLAS_.meshOpacity;
+	}
+	// show the mesh
+	_ATLAS_.meshes[_ATLAS_.currentVolume][label].visible = !_ATLAS_.meshes[_ATLAS_.currentVolume][label].visible;
 }
 
 function meshColor(hex, rgb) {
@@ -282,6 +231,8 @@ function opacityMesh(event, ui) {
 			_ATLAS_.meshes[_ATLAS_.currentVolume][m].opacity = ui.value / 100;		
 		}
 	}
+	
+	_ATLAS_.meshOpacity = ui.value / 100;
 
 	//_ATLAS_.meshes[_ATLAS_.currentVolume]['Model_3_Left-Cerebral-Cortex.vtk'].opacity = ui.value / 100;
 /*  if (RT.linked) {

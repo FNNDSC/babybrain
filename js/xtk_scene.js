@@ -4,6 +4,8 @@ _ATLAS_.volumes = new Array(_ATLAS_.steps.length);
 _ATLAS_.meshes = [0.14, 41, 80];
 _ATLAS_.currentVolume = 0;
 _ATLAS_.currentMesh = 0;
+_ATLAS_.meshOpacity = 0.9;
+_ATLAS_.labelOpacity = 0.5;
 
 _ATLAS_.labels = {
   "Accumbens area": 26,
@@ -93,8 +95,8 @@ $(function() {
 	r0.config.INTERMEDIATE_RENDERING = true;
 	r0.init();
 	r0.add(volume);
-	r0.camera.position = [ -300, -150, 400 ];
-	r0.camera.up = [0, -1, 0];
+	r0.camera.position = [ -200, 100, 10 ];
+	r0.camera.up = [0, 0, 1];
 	r0.onShowtime = function() {
 		init_viewer3d();
 		init_viewer2d();

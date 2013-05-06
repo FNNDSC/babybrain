@@ -3,45 +3,39 @@ $(function() {
 	// volume slice toggle
 	$( "#axial_slice_toggle" ).button();
 	$( "#axial_slice_toggle" ).click(function() {
-
-	  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-
-	  volume.children[2].children[Math.floor(volume.indexZ)].visible = !volume.children[2].children[Math.floor(volume.indexZ)].visible;
-
+		toggleAxialSliceVisibility();
 	});
 
-
 	$( "#coronal_slice_toggle" ).button();
-  $( "#coronal_slice_toggle" ).click(function() {
-
-    var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-
-    volume.children[1].children[Math.floor(volume.indexY)].visible = !volume.children[1].children[Math.floor(volume.indexY)].visible;
-
-  });
+	$( "#coronal_slice_toggle" ).click(function() {
+		toggleCoronalSliceVisibility();
+	});
 
 	$( "#sagittal_slice_toggle" ).button();
-  $( "#sagittal_slice_toggle" ).click(function() {
-
-    var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-
-    volume.children[0].children[Math.floor(volume.indexX)].visible = !volume.children[0].children[Math.floor(volume.indexX)].visible;
-
-  });
+	$( "#sagittal_slice_toggle" ).click(function() {
+		toggleSagittalSliceVisibility();
+	});
 
 	// volume render toggle
 	$("#3d_render_toggle").button();
 	$("#3d_render_toggle").click(function() {
-	  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-		volume.volumeRendering = !volume.volumeRendering;
+		toggleVolumeRendering();
 		if ($("#3d_render_toggle").is(":checked")){
 			$('#axial_slice_toggle').button('disable');
 			$('#coronal_slice_toggle').button('disable');
 			$('#sagittal_slice_toggle').button('disable');
+			$("#image_control_threshold").dragslider('values',0,40);
+			$("#image_control_opacity").slider('value',10);
+			thresholdVolume(null, [40,null]);
+			opacity3dVolume(null, 0.1);
 		} else {
 			$('#axial_slice_toggle').button('enable');
 			$('#coronal_slice_toggle').button('enable');
 			$('#sagittal_slice_toggle').button('enable');
+			$("#image_control_threshold").dragslider('values',0,0);
+			$("#image_control_opacity").slider('value',100);
+			thresholdVolume(null, [0,null]);
+			opacity3dVolume(null, 1);
 		}
 	});
 
@@ -66,5 +60,7 @@ $(function() {
 		value: 100,
 		slide: opacity3dVolume
 	});
+
+
 
 });

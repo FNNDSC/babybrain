@@ -20,22 +20,8 @@ $(function() {
 	
 	$('.label').click(function(e) {
 		var label = $(e.target).attr('data-value');
-		
-		if (_ATLAS_.volumes[_ATLAS_.currentVolume].labelmap.opacity == 0){
-			_ATLAS_.volumes[_ATLAS_.currentVolume].labelmap.opacity = 0.5;
-			$( "#label_control_opacity" ).slider( "value", 50 );
-		}
-		
-		if (label == "all") {
-			label = null;
-		}
-		if (label == "none") {
-			label = null;
-			_ATLAS_.volumes[_ATLAS_.currentVolume].labelmap.opacity = 0;
-			$( "#label_control_opacity" ).slider( "value", 0 );
-		}
-
-		_ATLAS_.volumes[_ATLAS_.currentVolume].labelmap.showOnly = label;
+		toggleLabelmapVisibility(label);
+		$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
 	});
 	
 });

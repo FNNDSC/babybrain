@@ -71,9 +71,6 @@ function init_viewer2d() {
     $("#green_slider").slider("option", "min", 0);
     $("#green_slider").slider("option", "max", dim[2] - 1);
     $("#green_slider").slider("option", "value", volume.indexZ);
-
-
-
 }
 
 
