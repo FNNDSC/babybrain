@@ -6,6 +6,7 @@ _ATLAS_.currentVolume = 0;
 _ATLAS_.currentMesh = 0;
 _ATLAS_.meshOpacity = 0.9;
 _ATLAS_.labelOpacity = 0.5;
+_ATLAS_.hover = null;
 
 _ATLAS_.labels = {
   "Accumbens area": 26,
