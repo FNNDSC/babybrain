@@ -29,46 +29,34 @@
 <script src="js/xtk_scene.js"></script>
 
 <script type="text/javascript">
-  
 </script>
 
 </head>
 <body>
 
-	<h1>Pedi-Brain Atlas Teacher</h1>
+	<!--header bar-->
+	<div id="banner">
+		<h1>Pedi-Brain Atlas Teacher
+			<button id="camera_home">
+				<img src='gfx/home_icon_copy.png'/>
+			</button>
+		</h1>
+		<h1 id='anatomy_caption'></h1>
+	</div>
 
 	<!--3D slice rendering-->
-	<div id='3d' class='threeDRenderer'></div>
+	<div id='3d' class='threeDRenderer'>
+	</div>
 
 	<!--2D slice viewers-->
 	<div id='sliceX' class='twoDRenderer'>
 		<div id='yellow_slider'></div>
-		<span class='ren2d_icon' style='left: 2px;' onclick='javascript:sliceX.rotateCounter();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w' style='margin: 5px;' title="Rotate"></span>
-		</span>
-		<span class='ren2d_icon' style='right: 2px;' onclick='javascript:sliceX.rotate();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w ren2d_icon_flip' style='margin: 5px;' title="Rotate"></span>
-		</span>
 	</div>
-
 	<div id='sliceY' class='twoDRenderer'>
 		<div id='red_slider'></div>
-		<span class='ren2d_icon' style='left: 2px;' onclick='javascript:sliceY.rotateCounter();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w' style='margin: 5px;' title="Rotate"></span>
-		</span>
-		<span class='ren2d_icon' style='right: 2px;' onclick='javascript:sliceY.rotate();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w ren2d_icon_flip' style='margin: 5px;' title="Rotate"></span>
-		</span>
 	</div>
-
 	<div id='sliceZ' class='twoDRenderer'>
 		<div id='green_slider'></div>
-		<span class='ren2d_icon' style='left: 2px;' onclick='javascript:sliceZ.rotateCounter();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w' style='margin: 5px;' title="Rotate"></span>
-		</span>
-		<span class='ren2d_icon' style='right: 2px;' onclick='javascript:sliceZ.rotate();'>
-			<span class='ui-icon ui-icon-arrowreturnthick-1-w ren2d_icon_flip' style='margin: 5px;' title="Rotate"></span>
-		</span>
 	</div>
 	<!--/2D slice viewers-->
 
@@ -156,11 +144,13 @@
 			<h1>Image Levels</h1>
 			<label for="image_control_threshold">Threshold:</label>
 			<div id="image_control_threshold"></div>
-			<br /> <label for="image_control_brightness">Window/Level:</label>
+			<br/>
+			<label for="image_control_brightness">Window/Level:</label>
 			<div id="image_control_brightness"></div>
-			<br /> <label for="image_control_opacity">Opacity:</label>
+			<br/>
+			<label for="image_control_opacity">Opacity:</label>
 			<div id="image_control_opacity"></div>
-			<br />
+			<br/>
 
 			<div style="clear: both;"></div>
 		</div>
@@ -169,6 +159,15 @@
 		<!--label maps panel-->
 		<div class="panel_labels">
 			<h1>Label Maps</h1>
+			<br/>
+			<input type="checkbox" id="label_hover_select" checked="checked" />
+			<label for="label_hover_select">
+				<span>Hover Select</span>
+			</label>
+			<button id="show_all_labels">Show All</button>
+			<button id="hide_all_labels">Hide All</button>
+			<br/>
+			<br/>
 			<div id="label_tree"></div>
 			<h1>Controls</h1>
 			<label for="label_control_opacity">Opacity:</label>
@@ -196,10 +195,10 @@
 	<a class="panel_trigger" id="trigger_labels" target="panel_labels" href="#"><div class="panel_trigger_text">Labels</div></a>
 	<a class="panel_trigger" id="trigger_mesh" target="panel_mesh" href="#"><div class="panel_trigger_text">Surfs</div></a>
 	<!--/sliding panel triggers-->
+	
 
 	<!--atlas selector-->
 	<div id="atlas-selector">
-	  <div id='anatomycaption'><h1></h1></div>
 		<div id="atlas-selector-slider"></div>
 		<div class="atlas-selector-steps">
 			<span class="atlas-selector-tick">|<br/>0.14</span>

@@ -44,3 +44,17 @@ padding: 0 0 10px;
 margin: 20px 0 20px 0;
 }
 
+#anatomy_caption{
+font-size: 20px;
+font-family: verdana, helvetica, arial, sans-serif;
+letter-spacing:-2px;
+color:#c5c24f;
+font-weight:700;
+padding:10px 0px 5px 0px;
+
+position:relative;
+position:absolute;
+top: 0;
+right: 21%;
+display:block;
+}

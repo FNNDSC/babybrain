@@ -9,7 +9,7 @@
 	margin-bottom: 0;
 	width:800px;
 	display:block;
-	
+	background: none;
 }
 
 #atlas-selector-slider {
@@ -40,4 +40,6 @@
 #atlas-selector-age {
 	background-color: #000000;
 	color: #ffffff;
+	border: none;
+	width: 30px;
 }

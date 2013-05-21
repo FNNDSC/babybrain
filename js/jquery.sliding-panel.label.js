@@ -1,9 +1,28 @@
 $(function() {
 	
 	var labels = _ATLAS_.labels;
+
+	// volume slice toggle
+	$( "#label_hover_select" ).button();
+	$( "#label_hover_select" ).click(function() {
+		_ATLAS_.hoverLabelSelect = !_ATLAS_.hoverLabelSelect;
+	});
+
+	$( "#show_all_labels" ).button();
+	$( "#show_all_labels" ).click(function() {
+		toggleLabelmapVisibility('all');
+		$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
+		$('#anatomy_caption').html('');
+	});
+	
+	$( "#hide_all_labels" ).button();
+	$( "#hide_all_labels" ).click(function() {
+		toggleLabelmapVisibility('none');
+		$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
+		$('#anatomy_caption').html('');
+	});
+
 	$('#label_tree').append('<ul>');
-	$('#label_tree').append('<li class="label" data-value="all">Show All</li>');
-	$('#label_tree').append('<li class="label" data-value="none">Hide All</li>');
 	for (l in labels) {
 		$('#label_tree').append('<li class="label" data-value="'+labels[l]+'">'+l+'</li>');
 	}

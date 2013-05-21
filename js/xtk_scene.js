@@ -7,6 +7,7 @@ _ATLAS_.currentMesh = 0;
 _ATLAS_.meshOpacity = 0.9;
 _ATLAS_.labelOpacity = 0.5;
 _ATLAS_.hover = null;
+_ATLAS_.hoverLabelSelect = true;
 
 _ATLAS_.labels = {
   "Accumbens area": 26,
@@ -96,8 +97,8 @@ $(function() {
 	r0.config.INTERMEDIATE_RENDERING = true;
 	r0.init();
 	r0.add(volume);
-	r0.camera.position = [ -200, 100, 10 ];
-	r0.camera.up = [0, 0, 1];
+	r0.camera.position = [ 0, 0, -200 ]; //
+	r0.camera.up = [0, 1, 0];
 	r0.onShowtime = function() {
 		init_viewer3d();
 		init_viewer2d();

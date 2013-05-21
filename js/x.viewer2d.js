@@ -36,14 +36,11 @@ function init_viewer2d() {
   sliceX.init();
   sliceX.add(volume);
   sliceX.render();
-
   sliceX.interactor.onMouseMove = function() {
-
-    if (_ATLAS_.hover){clearTimeout(_ATLAS_.hover);}
-
+    if (_ATLAS_.hover){
+    	clearTimeout(_ATLAS_.hover);
+    }
     _ATLAS_.hover = setTimeout(on2DHover.bind(this, sliceX), 100);
-
-
   };
 
   // Y Slice
@@ -56,13 +53,11 @@ function init_viewer2d() {
   sliceY.init();
   sliceY.add(volume);
   sliceY.render();
-
   sliceY.interactor.onMouseMove = function() {
-
-    if (_ATLAS_.hover){clearTimeout(_ATLAS_.hover);}
-
+    if (_ATLAS_.hover){
+    	clearTimeout(_ATLAS_.hover);
+	}
     _ATLAS_.hover = setTimeout(on2DHover.bind(this, sliceY), 100);
-
   };
 
   // Z Slice
@@ -75,13 +70,11 @@ function init_viewer2d() {
   sliceZ.init();
   sliceZ.add(volume);
   sliceZ.render();
-
   sliceZ.interactor.onMouseMove = function() {
-
-    if (_ATLAS_.hover){clearTimeout(_ATLAS_.hover);}
-
+    if (_ATLAS_.hover){
+    	clearTimeout(_ATLAS_.hover);
+    }
     _ATLAS_.hover = setTimeout(on2DHover.bind(this, sliceZ), 100);
-
   };
 
   // update 2d slice sliders
@@ -102,37 +95,30 @@ function init_viewer2d() {
 
 function on2DHover(renderer) {
 
+  if (!_ATLAS_.hoverLabelSelect){
+	  return;
+  }
+
+  var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+
   var mousepos = renderer.interactor.mousePosition;
   var ijk = renderer.xy2ijk(mousepos[0], mousepos[1]);
-
-  var vol = _ATLAS_.volumes[_ATLAS_.currentVolume];
-
   if (!ijk) {
-//    vol.labelmap.opacity = 0.0;
-//    vol.labelmap.showOnly = null;
-    return
+    return;
   }
+
   var orientedIJK = ijk.slice();
-
-
   orientedIJK[0] = ijk[2];
   orientedIJK[1] = ijk[1];
   orientedIJK[2] = ijk[0];
 
-  var labelvalue = vol.labelmap.image[orientedIJK[0]][orientedIJK[1]][orientedIJK[2]];
-
+  var labelvalue = volume.labelmap.image[orientedIJK[0]][orientedIJK[1]][orientedIJK[2]];
   if (!labelvalue || labelvalue == 0) {
-//    vol.labelmap.opacity = 0.0;
-//    vol.labelmap.showOnly = null;
-    return
+    return;
   }
 
-  vol.labelmap.opacity = 0.6;
-  vol.labelmap.showOnly = labelvalue;
-  var labelname = vol.labelmap.colortable.get(labelvalue)[0];
-
-
-  $('#anatomycaption').children().first().html(labelname);
-
-
+  volume.labelmap.opacity = 0.6;
+  volume.labelmap.showOnly = labelvalue;
+  var labelname = volume.labelmap.colortable.get(labelvalue)[0];
+  $('#anatomy_caption').html(labelname);
 }
