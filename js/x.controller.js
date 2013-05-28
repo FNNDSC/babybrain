@@ -34,6 +34,21 @@ function setupUi() {
 
 }
 
+function resetCameraPos(axis) {
+	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+	if (axis == 'axial'){
+		r0.camera.position = [ 0, 0, -200 ]; //
+	} else if (axis == 'coronal'){
+		r0.camera.position = [ 0, 200, 0 ]; //
+	} else if (axis == 'sagittal'){
+		r0.camera.position = [ -200, 0, 0 ]; //
+	}
+	r0.camera.up = [0, 0, 1];		
+	volume.indexX = 56;
+	volume.indexY = 69.5;
+	volume.indexZ = 81.5;
+}
+
 function toggleVolumeRendering() {
 	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 	volume.volumeRendering = !volume.volumeRendering;
