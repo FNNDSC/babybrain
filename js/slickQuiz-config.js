@@ -79,7 +79,7 @@ var quizJSON = {
 
 
 function q1_callback() {
-	//
+	//scene_picking();
 }
 
 function q2_callback() {

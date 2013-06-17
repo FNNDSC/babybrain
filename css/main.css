@@ -44,6 +44,31 @@ padding: 0 0 10px;
 margin: 20px 0 20px 0;
 }
 
+#banner {
+	border:1px solid #444444;
+	background: #333333;
+	height: 40px;
+	width: 80%;
+}
+
+.camera_reset_btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#twoD_viewer_header {
+	border: 1px solid #666;
+	background-color: #000;
+	position: absolute;
+	width: 20%;
+	height: 7%;
+	right: 0%;
+	top: 0%;
+	text-align: center;
+}
+
+
 #anatomy_caption{
 font-size: 20px;
 font-family: verdana, helvetica, arial, sans-serif;
@@ -51,10 +76,4 @@ letter-spacing:-2px;
 color:#c5c24f;
 font-weight:700;
 padding:10px 0px 5px 0px;
-
-position:relative;
-position:absolute;
-top: 0;
-right: 21%;
-display:block;
 }

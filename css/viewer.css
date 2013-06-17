@@ -10,20 +10,21 @@
   background-color: #000;
   position: absolute;
   width: 20%;
-  height: 33.333%;
+  height: 31%;
+  /*height: 33.333%;*/
   right: 0%;
 }
 
 #sliceX {
-  top: 0%;
+  top: 7%;
 }
 
 #sliceY {
-  top: 33.333%;
+  top: 38%;
 }
 
 #sliceZ {
-  top: 66.666%;
+  top: 69%;
 }
 
 
@@ -58,11 +59,3 @@
   opacity: 0.5;
 }
 
-#camera_home {
-	background: none;
-	border: none;
-	cursor: pointer;
-/*	position: absolute;
-	left: 0%;
-	bottom: 0%;*/
-}

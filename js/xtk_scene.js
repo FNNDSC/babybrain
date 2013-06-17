@@ -1,3 +1,8 @@
+/*
+ * This is the entry point
+ */
+
+ 
 var _ATLAS_ = {};
 _ATLAS_.steps = [0.14, 41, 80];
 _ATLAS_.volumes = new Array(_ATLAS_.steps.length);
@@ -9,6 +14,7 @@ _ATLAS_.labelOpacity = 0.5;
 _ATLAS_.hover = null;
 _ATLAS_.hoverLabelSelect = true;
 
+// create dictionary "label name" : "label value"
 _ATLAS_.labels = {
   "Accumbens area": 26,
   "Amygdala": 18,
@@ -82,13 +88,12 @@ sliceZ = null;
 
 $(function() {
 
-	// MRI volume
+	// initialize with the MRI volume with the youngest dataset
 	var volume = new X.volume();
 	volume.file = 'data/0.14/volume.nii.gz';
 	volume.labelmap.file = 'data/0.14/labelmap.nii.gz';
 	volume.labelmap.colortable.file = 'data/colortable.txt';
 	volume.labelmap.opacity = 0;
-
 	_ATLAS_.volumes[_ATLAS_.currentVolume] = volume;
 
 	// 3D rendering
@@ -102,6 +107,7 @@ $(function() {
 	r0.onShowtime = function() {
 		init_viewer3d();
 		init_viewer2d();
+		scene_picking();
 	};
 	r0.render();
 

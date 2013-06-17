@@ -37,17 +37,16 @@
 	<!--header bar-->
 	<div id="banner">
 		<h1>Pedi-Brain Atlas Teacher
-			<button id="camera_home" onclick="resetCameraPos('axial')">
+			<button class="camera_reset_btn" onclick="resetCameraPos('axial')">
 				<img src='gfx/view_axial.png'/>
 			</button>
-			<button  id="camera_home" onclick="resetCameraPos('coronal')">
+			<button  class="camera_reset_btn" onclick="resetCameraPos('coronal')">
 				<img src='gfx/view_coronal.png'/>
 			</button>
-			<button  id="camera_home" onclick="resetCameraPos('sagittal')">
+			<button  class="camera_reset_btn" onclick="resetCameraPos('sagittal')">
 				<img src='gfx/view_sagittal.png'/>
 			</button>
 		</h1>
-		<h1 id='anatomy_caption'></h1>
 	</div>
 
 	<!--3D slice rendering-->
@@ -55,6 +54,9 @@
 	</div>
 
 	<!--2D slice viewers-->
+	<div id='twoD_viewer_header'>
+		<h1 id='anatomy_caption'>No Label Selected</h1>
+	</div>
 	<div id='sliceX' class='twoDRenderer'>
 		<div id='yellow_slider'></div>
 	</div>

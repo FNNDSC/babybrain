@@ -34,21 +34,6 @@ function setupUi() {
 
 }
 
-function resetCameraPos(axis) {
-	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
-	if (axis == 'axial'){
-		r0.camera.position = [ 0, 0, -200 ]; //
-	} else if (axis == 'coronal'){
-		r0.camera.position = [ 0, 200, 0 ]; //
-	} else if (axis == 'sagittal'){
-		r0.camera.position = [ -200, 0, 0 ]; //
-	}
-	r0.camera.up = [0, 0, 1];		
-	volume.indexX = 56;
-	volume.indexY = 69.5;
-	volume.indexZ = 81.5;
-}
-
 function toggleVolumeRendering() {
 	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 	volume.volumeRendering = !volume.volumeRendering;
@@ -187,7 +172,7 @@ function opacityLabelmap(event, ui) {
 function toggleLabelmapVisibility(label) {
 	var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 	if (!volume) {
-	return;
+		return;
 	}
 	if (label == "all") {
 		label = null;
@@ -199,7 +184,17 @@ function toggleLabelmapVisibility(label) {
 		volume.labelmap.opacity = 0.5;
 	}
 	volume.labelmap.showOnly = label;
+
+	// remember opacity
 	_ATLAS_.labelOpacity = volume.labelmap.opacity;
+	
+	// update label caption
+	var labelname = volume.labelmap.colortable.get(label)[0];
+	var _r = parseInt(volume.labelmap.colortable.get(label)[1] * 255, 10);
+	var _g = parseInt(volume.labelmap.colortable.get(label)[2] * 255, 10);
+	var _b = parseInt(volume.labelmap.colortable.get(label)[3] * 255, 10);
+	$('#anatomy_caption').html(labelname);
+	$('#anatomy_caption').css('color', 'rgb( ' + _r + ',' + _g + ',' + _b + ' )' );
 }
 
 //
@@ -211,6 +206,8 @@ function toggleMeshVisibility(label) {
 		// load mesh
 		var m = new X.mesh();
 		m.file = "data/"+_ATLAS_.steps[_ATLAS_.currentVolume]+"/"+label;
+		m.caption = label.replace(".vtk","").split("_")[2].split();//.replace("Model_","")
+		console.log(label);
 		r0.add(m);
 		// grab label value
 		var labelvalue = label.replace("Model_","").split("_")[0];
@@ -350,5 +347,14 @@ function thresholdFibers(event, ui) {
     RT._updater2 = setTimeout(RT.pushFibersScalars.bind(RT, 'upperThreshold', fibers.scalars.upperThreshold), 150);
 
   }
+
+}
+
+
+
+function scene_picking_check() {
+
+  // return the currently picked model
+  return $('.scene_picker').filter(':visible').html();
 
 }
