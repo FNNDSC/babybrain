@@ -8,11 +8,13 @@ _ATLAS_.steps = [0.14, 41, 80];
 _ATLAS_.volumes = new Array(_ATLAS_.steps.length);
 _ATLAS_.meshes = [0.14, 41, 80];
 _ATLAS_.currentVolume = 0;
+_ATLAS_.volumesLoaded = false;
 _ATLAS_.currentMesh = 0;
 _ATLAS_.meshOpacity = 0.9;
 _ATLAS_.labelOpacity = 0.5;
 _ATLAS_.hover = null;
 _ATLAS_.hoverLabelSelect = true;
+_ATLAS_.atlasLoop = null;
 
 // create dictionary "label name" : "label value"
 _ATLAS_.labels = {

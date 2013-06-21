@@ -11,15 +11,11 @@ $(function() {
 	$( "#show_all_labels" ).button();
 	$( "#show_all_labels" ).click(function() {
 		toggleLabelmapVisibility('all');
-		$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
-		$('#anatomy_caption').html('');
 	});
 	
 	$( "#hide_all_labels" ).button();
 	$( "#hide_all_labels" ).click(function() {
 		toggleLabelmapVisibility('none');
-		$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
-		$('#anatomy_caption').html('');
 	});
 
 	$('#label_tree').append('<ul>');

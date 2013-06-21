@@ -123,15 +123,6 @@ function on2DHover(renderer) {
 	if (!labelvalue || labelvalue == 0) {
 		return;
 	}
-	//console.log(labelvalue);
 
-	
-	volume.labelmap.opacity = 0.6;
-	volume.labelmap.showOnly = labelvalue;
-	var labelname = volume.labelmap.colortable.get(labelvalue)[0];
-	var _r = parseInt(volume.labelmap.colortable.get(labelvalue)[1] * 255, 10);
-	var _g = parseInt(volume.labelmap.colortable.get(labelvalue)[2] * 255, 10);
-	var _b = parseInt(volume.labelmap.colortable.get(labelvalue)[3] * 255, 10);
-	$('#anatomy_caption').html(labelname);
-	$('#anatomy_caption').css('color', 'rgb( ' + _r + ',' + _g + ',' + _b + ' )' );
+	toggleLabelmapVisibility(labelvalue);	
 }

@@ -64,12 +64,15 @@ function scene_picking() {
 						return;
 					}
 		
-					var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
+					toggleLabelmapVisibility(labelvalue);
+					
+/*					var volume = _ATLAS_.volumes[_ATLAS_.currentVolume];
 					volume.labelmap.opacity = 0.6;
 					volume.labelmap.showOnly = labelvalue;
 					var labelname = volume.labelmap.colortable.get(labelvalue)[0];
 					$('#anatomy_caption').html(labelname);
 					$('#anatomy_caption').css('color', 'rgb(' + _color + ')');
+*/
 				}
 			}	
 		}, 100);

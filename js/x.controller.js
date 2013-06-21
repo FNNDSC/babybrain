@@ -166,6 +166,7 @@ function opacityLabelmap(event, ui) {
 		volume.labelmap.opacity = ui;
 	} else {
 		volume.labelmap.opacity = ui.value / 100;
+		_ATLAS_.labelOpacity = volume.labelmap.opacity;
 	}
 }
 
@@ -174,27 +175,43 @@ function toggleLabelmapVisibility(label) {
 	if (!volume) {
 		return;
 	}
-	if (label == "all") {
-		label = null;
-		volume.labelmap.opacity = 0.5;
-	} else if (label == "none") {
+	if (label == "none") {
 		label = null;
 		volume.labelmap.opacity = 0;
-	} else {
-		volume.labelmap.opacity = 0.5;
+		_ATLAS_.labelOpacity = volume.labelmap.opacity;//remember opacity
+		$('#anatomy_caption').html('No Label Selected');
+		$('#anatomy_caption').css('color', 'rgb(1,1,1)' );
+	} else if (label == "all") {
+		label = null;
+		if (_ATLAS_.labelOpacity < 0.1) {
+			volume.labelmap.opacity = 0.5;
+			_ATLAS_.labelOpacity = volume.labelmap.opacity;//remember opacity
+		} else {
+			volume.labelmap.opacity = _ATLAS_.labelOpacity;
+		}
+		$('#anatomy_caption').html('All');
+		$('#anatomy_caption').css('color', 'rgb(1,1,1)' );
 	}
-	volume.labelmap.showOnly = label;
-
-	// remember opacity
-	_ATLAS_.labelOpacity = volume.labelmap.opacity;
+	else {
+		// make selected label visible
+		if (_ATLAS_.labelOpacity < 0.1) {
+			volume.labelmap.opacity = 0.5;
+			_ATLAS_.labelOpacity = volume.labelmap.opacity;//remember opacity
+		} else {
+			volume.labelmap.opacity = _ATLAS_.labelOpacity;
+		}
+		// update label caption
+		var labelname = volume.labelmap.colortable.get(label)[0];
+		var _r = parseInt(volume.labelmap.colortable.get(label)[1] * 255, 10);
+		var _g = parseInt(volume.labelmap.colortable.get(label)[2] * 255, 10);
+		var _b = parseInt(volume.labelmap.colortable.get(label)[3] * 255, 10);
+		$('#anatomy_caption').html(labelname);
+		$('#anatomy_caption').css('color', 'rgb( ' + _r + ',' + _g + ',' + _b + ' )' );
+	}
 	
-	// update label caption
-	var labelname = volume.labelmap.colortable.get(label)[0];
-	var _r = parseInt(volume.labelmap.colortable.get(label)[1] * 255, 10);
-	var _g = parseInt(volume.labelmap.colortable.get(label)[2] * 255, 10);
-	var _b = parseInt(volume.labelmap.colortable.get(label)[3] * 255, 10);
-	$('#anatomy_caption').html(labelname);
-	$('#anatomy_caption').css('color', 'rgb( ' + _r + ',' + _g + ',' + _b + ' )' );
+	// show label(s)
+	volume.labelmap.showOnly = label;
+	$( "#label_control_opacity" ).slider( "value", 100*_ATLAS_.labelOpacity );
 }
 
 //
