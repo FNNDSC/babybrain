@@ -15,6 +15,7 @@ _ATLAS_.labelOpacity = 0.5;
 _ATLAS_.hover = null;
 _ATLAS_.hoverLabelSelect = true;
 _ATLAS_.atlasLoop = null;
+_ATLAS_.infoWindow = null;
 
 // create dictionary "label name" : "label value"
 _ATLAS_.labels = {

@@ -47,8 +47,10 @@ margin: 20px 0 20px 0;
 #banner {
 	border:1px solid #444444;
 	background: #333333;
-	height: 40px;
+	height: 35px;
 	width: 80%;
+	padding-left: 5px;
+	padding-bottom: 5px;
 }
 
 .camera_reset_btn {
@@ -57,23 +59,46 @@ margin: 20px 0 20px 0;
 	cursor: pointer;
 }
 
+#info_button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	float: left;
+	margin-top: 5px;
+	
+}
+
 #twoD_viewer_header {
 	border: 1px solid #666;
 	background-color: #000;
 	position: absolute;
 	width: 20%;
-	height: 7%;
+	height: 40px;
 	right: 0%;
 	top: 0%;
 	text-align: center;
 }
 
+#twoD_viewers {
+	border-left: thin solid #666;
+	background-color: #000;
+	position: absolute;
+	width: 20%;
+	height: 93%;
+	right: 0%;
+}
 
 #anatomy_caption{
-font-size: 20px;
-font-family: verdana, helvetica, arial, sans-serif;
-letter-spacing:-2px;
-color:#c5c24f;
-font-weight:700;
-padding:10px 0px 5px 0px;
+	font-size: 20px;
+	font-family: verdana, helvetica, arial, sans-serif;
+	letter-spacing:-2px;
+	color:#c5c24f;
+	font-weight:700;
+	padding:10px 0px 5px 0px;
+}
+
+#info_frame {
+	width: 750px;
+	height: 92%;
+	margin: 6px 25px;
 }

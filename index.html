@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.9.2.custom.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.modal.css" />
 <link rel="stylesheet" type="text/css" href="css/sliding-panel.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/jqtree.css">
 <link rel="stylesheet" type="text/css" href="css/jqtree.extend.css">
@@ -13,6 +14,8 @@
 <link rel="stylesheet" type="text/css" href="css/viewer.css" />
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery.modal.js"></script>
+<script src="js/jquery.info.js"></script>
 <script src="js/jquery.ui.slider.js"></script>
 <script src="js/tree.jquery.js"></script>
 <script src="js/jquery.sliding-panel.js"></script>
@@ -55,16 +58,21 @@
 
 	<!--2D slice viewers-->
 	<div id='twoD_viewer_header'>
+		<button  id="info_button">
+			<img src='gfx/info_icon.png'/>
+		</button>
 		<h1 id='anatomy_caption'>No Label Selected</h1>
 	</div>
-	<div id='sliceX' class='twoDRenderer'>
-		<div id='yellow_slider'></div>
-	</div>
-	<div id='sliceY' class='twoDRenderer'>
-		<div id='red_slider'></div>
-	</div>
-	<div id='sliceZ' class='twoDRenderer'>
-		<div id='green_slider'></div>
+	<div id="twoD_viewers">
+		<div id='sliceX' class='twoDRenderer'>
+			<div id='yellow_slider'></div>
+		</div>
+		<div id='sliceY' class='twoDRenderer'>
+			<div id='red_slider'></div>
+		</div>
+		<div id='sliceZ' class='twoDRenderer'>
+			<div id='green_slider'></div>
+		</div>
 	</div>
 	<!--/2D slice viewers-->
 
@@ -222,6 +230,12 @@
 	</div>
 	<!--/atlas selector-->
 
+	<!--modal info window-->
+	<div class="jqmWindow" id="dialog">
+		<a href="#" class="jqmClose"><em>Close</em></a>
+		<iframe id="info_frame"></iframe>
+	</div>
+	<!--/modal info window-->
 
 
 </body>
